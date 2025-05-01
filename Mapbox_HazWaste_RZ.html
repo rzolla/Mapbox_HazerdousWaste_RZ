@@ -1,0 +1,82 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <title>Hazardous Waste and/or Oil Sites in Massachusetts</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <script src="https://api.tiles.mapbox.com/mapbox-gl-js/v3.3.0/mapbox-gl.js"></script>
+    <link
+      href="https://api.tiles.mapbox.com/mapbox-gl-js/v3.3.0/mapbox-gl.css"
+      rel="stylesheet"
+    />
+    <style>
+      body {
+        margin: 0;
+        padding: 0;
+      }
+
+      #map {
+        position: absolute;
+        top: 0;
+        bottom: 0;
+        width: 100%;
+      }
+      .map-overlay {
+        position: absolute;
+        bottom: 0;
+        left: 0;
+        background: #ffffff;
+        margin-left: 20px;
+        padding-left: 20px;
+        font-family: Arial, sans-serif;
+        overflow: auto;
+        border-radius: 6px;
+}
+      #features {
+        top: 0;
+        height: 130px;
+        margin-top: 20px;
+        width: 600px;
+}
+    </style>
+  </head>
+  <body>
+    <div id="map"></div>
+    <div class="map-overlay" id="features">
+        <h2>MassDEP Oil and/or Hazardous Material Sites with Activity and Use Limitations</h2>
+        <p>Click a point for address and name of site.</p>
+    <script>
+      // The value for 'accessToken' begins with 'pk...'
+      mapboxgl.accessToken = 'pk.eyJ1IjoicnpvbGxhIiwiYSI6ImNtOTk0anBtYzAwcWYya3BxdjZxanNydWMifQ.FPkFYeZPmpG9w4rKzIQ2IA';
+      const map = new mapboxgl.Map({
+        container: 'map',
+        // Replace YOUR_STYLE_URL with your style URL.
+        style: 'mapbox://styles/rzolla/cm9d65pff00ah01qk15fgdtd4',
+        center: [-71.70, 42.393748],
+        zoom: 8
+      });
+      /*
+     Add an event listener that runs when a user clicks on the map element.
+     */
+     map.on('click', (event) => {
+       // If the user clicked on one of your markers, get its information.
+       const features = map.queryRenderedFeatures(event.point, {
+         layers: ['massdep-oil-and-or-hazardous-bgt474'] // replace with your layer name
+       });
+       if (!features.length) {
+         return;
+       }
+       const feature = features[0];
+       
+       const popup = new mapboxgl.Popup({ offset: [0, -15] })
+  .setLngLat(feature.geometry.coordinates)
+  .setHTML(
+    `<h3>${feature.properties.NAME}</h3><p>${feature.properties.ADDRESS}, ${feature.properties.TOWN}</p>`
+  )
+  .addTo(map);
+});
+
+      // Code from the next step will go here.
+    </script>
+  </body>
+</html>
