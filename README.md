@@ -8,7 +8,7 @@ This web application provides an interactive map visualization of MassDEP (Massa
 - Clickable points representing hazardous waste and oil sites
 - Popup information displaying:
   - Site name
-  - Site address
+  - Site address 
   - Town location
 - Custom map styling using Mapbox Studio
 - Responsive design with clean user interface
