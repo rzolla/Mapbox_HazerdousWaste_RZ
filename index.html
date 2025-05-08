@@ -31,20 +31,158 @@
         font-family: Arial, sans-serif;
         overflow: auto;
         border-radius: 6px;
-}
+      }
       #features {
         top: 0;
         height: 130px;
         margin-top: 20px;
-        width: 600px;
-}
+        width: 500px;
+      }
+      #info-box {
+        top: 170px;
+        height: calc(100% - 190px);
+        margin-left: 20px;
+        padding-left: 20px;
+        padding-right: 20px;
+        width: 480px;
+        box-shadow: 0 0 10px rgba(0,0,0,0.1);
+      }
+      .legend {
+        position: absolute;
+        bottom: 20px;
+        right: 20px;
+        background: white;
+        padding: 10px;
+        border-radius: 6px;
+        box-shadow: 0 0 10px rgba(0,0,0,0.1);
+      }
+      .legend-item {
+        display: flex;
+        align-items: center;
+        margin: 5px 0;
+      }
+      .legend-color {
+        width: 20px;
+        height: 20px;
+        margin-right: 10px;
+        border: 1px solid #ccc;
+      }
     </style>
   </head>
   <body>
     <div id="map"></div>
     <div class="map-overlay" id="features">
-        <h2>MassDEP Oil and/or Hazardous Material Sites with Activity and Use Limitations</h2>
+        <h2 style="color:crimson">MassDEP Oil and/or Hazardous Material Sites with Activity and Use Limitations</h2>
         <p>Click a point for address and name of site.</p>
+    </div>
+    <div class="map-overlay" id="info-box">
+        <h3>RAO Class Definitions</h3>
+        <div id="site-info">
+          <strong>Class A:</strong> Remedial work was completed and a level of "no significant risk" has been achieved.
+          
+          <p>A1 - Contamination has been reduced to background or a threat of release has been eliminated.</p>
+          
+          <p>A2 - Contamination has not been reduced to background.</p>
+          
+          <p>A3 - Contamination has not been reduced to background and an Activity and use Limitation (AUL) has been implemented.</p>
+          
+          <p>A4 - Contamination has not been reduced to background and an AUL has been implemented. Contamination is located at a depth of 15 feet but evaluation has determined that it is not feasible to reduce it.</p>
+          
+          <strong>Class B:</strong>Site assessment indicates that "no significant risk" exists. No remedial work was necessary.
+          
+          <p>B1 - No Significant Risk exists.</p>
+          
+          <p>B2 - No Significant Risk exists, but that level is contingent upon one or more AULs that have been implemented.</p>
+          
+          <p>B3 - No Significant Risk exists, contingent upon AULs that have been implemented, and contamination is located at a depth of 15 feet but evaluation has determined that it is not feasible to reduce it.</p>
+          
+          <strong>Class C:</strong>Site has not reached a level of no significant risk.
+          
+          <p>C1 - A temporary cleanup. Site has not reached a level of no significant risk. The site must be evaluated every five years.</p>
+          
+          <p>C2 - Remedial action has been initiated</p>
+          
+          <strong>Other Classifications:</strong>
+          <p>PA - Permanent Solution with Conditions and a land use restriction</p>
+          
+          <p>PC - Permanent Solution with Conditions and no land use restriction.</p>
+          
+          <p>PN - Permanent Solution with No Conditions (unrestricted use)</p>
+          
+          <p>TF - Temporary Solution at a site where a Permanent Solution is Feasible and response actions are underway to achieve a Permanent Solution.</p>
+          
+          <p>TN - Temporary Solution at a site where a Permanent Solution is Not currently feasible and the site must be maintained and periodically reviewed until a Permanent Solution is achieved.</p>
+          
+          <p>NC - No controls</p>
+        </div>
+    </div>
+    <div class="legend">
+        <h3>RAO Class</h3>
+        <div class="legend-item">
+            <div class="legend-color" style="background-color: hsl(61, 90%, 87%);"></div>
+            <span>A1</span>
+        </div>
+        <div class="legend-item">
+            <div class="legend-color" style="background-color: hsl(61, 94%, 51%);"></div>
+            <span>A2</span>
+        </div>
+        <div class="legend-item">
+            <div class="legend-color" style="background-color: hsl(61, 93%, 45%);"></div>
+            <span>A3</span>
+        </div>
+        <div class="legend-item">
+            <div class="legend-color" style="background-color: hsl(78, 96%, 46%);"></div>
+            <span>A4</span>
+        </div>
+        <div class="legend-item">
+            <div class="legend-color" style="background-color: hsl(33, 81%, 74%);"></div>
+            <span>B1</span>
+        </div>
+        <div class="legend-item">
+            <div class="legend-color" style="background-color: hsl(33, 99%, 66%);"></div>
+            <span>B2</span>
+        </div>
+        <div class="legend-item">
+            <div class="legend-color" style="background-color: hsl(33, 97%, 53%);"></div>
+            <span>B3</span>
+        </div>
+        <div class="legend-item">
+            <div class="legend-color" style="background-color: hsl(5, 94%, 65%);"></div>
+            <span>C1</span>
+        </div>
+        <div class="legend-item">
+            <div class="legend-color" style="background-color: hsl(5, 93%, 44%);"></div>
+            <span>C2</span>
+        </div>
+        <div class="legend-item">
+            <div class="legend-color" style="background-color: hsl(286, 64%, 85%);"></div>
+            <span>PA</span>
+        </div>
+        <div class="legend-item">
+            <div class="legend-color" style="background-color: hsl(267, 79%, 61%);"></div>
+            <span>PC</span> 
+        </div>
+        <div class="legend-item">
+            <div class="legend-color" style="background-color: hsl(301, 91%, 80%);"></div>
+            <span>PN</span>
+        </div>
+        <div class="legend-item">
+            <div class="legend-color" style="background-color: hsl(196, 72%, 50%);"></div>
+            <span>TF</span>
+        </div>
+        <div class="legend-item">
+            <div class="legend-color" style="background-color: hsl(196, 82%, 77%);"></div>
+            <span>TN</span>
+        </div>
+        <div class="legend-item">
+            <div class="legend-color" style="background-color: hsl(350, 100%, 85%);"></div>
+            <span>NC</span>
+        </div>
+        <div class="legend-item">
+            <div class="legend-color" style="background-color: hsl(180, 2%, 96%);"></div>
+            <span>Uncategorized</span>
+        </div>
+    </div>
     <script>
       // The value for 'accessToken' begins with 'pk...'
       mapboxgl.accessToken = 'pk.eyJ1IjoicnpvbGxhIiwiYSI6ImNtOTk0anBtYzAwcWYya3BxdjZxanNydWMifQ.FPkFYeZPmpG9w4rKzIQ2IA';
@@ -55,6 +193,27 @@
         center: [-71.70, 42.393748],
         zoom: 8
       });
+
+      map.on('load', () => {
+        // Get the layer's paint properties
+        const layer = map.getStyle().layers.find(l => l.id === 'massdep-oil-and-or-hazardous-bgt474');
+        if (layer && layer.paint && layer.paint['circle-color']) {
+          const colors = layer.paint['circle-color'];
+          console.log('Map colors:', colors); // This will help us see the actual colors
+          
+          // Update legend colors based on the actual map style
+          const legendItems = document.querySelectorAll('.legend-item');
+          legendItems.forEach(item => {
+            const className = item.querySelector('span').textContent;
+            const colorBox = item.querySelector('.legend-color');
+            // Match the color based on the RAO class
+            if (colors[className]) {
+              colorBox.style.backgroundColor = colors[className];
+            }
+          });
+        }
+      });
+
       /*
      Add an event listener that runs when a user clicks on the map element.
      */
@@ -71,7 +230,7 @@
        const popup = new mapboxgl.Popup({ offset: [0, -15] })
   .setLngLat(feature.geometry.coordinates)
   .setHTML(
-    `<h3>${feature.properties.NAME}</h3><p>${feature.properties.ADDRESS}, ${feature.properties.TOWN}</p>`
+    `<h3>${feature.properties.NAME}</h3><p>${feature.properties.ADDRESS}, ${feature.properties.TOWN},<br>RAO Class: ${feature.properties.RAO_CLASS}</p>`
   )
   .addTo(map);
 });
